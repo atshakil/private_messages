@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :load_recipients, only: [:new, :create]
 
   # GET /messages
   # GET /messages.json
@@ -25,10 +26,10 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = Message.new(message_params.merge users: [current_user])
 
     respond_to do |format|
-      if @message.save
+      if @message.commit_with_recipient recipient_param
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
@@ -71,5 +72,13 @@ class MessagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
       params.require(:message).permit(:content)
+    end
+
+    def recipient_param
+      params[:recipient_id].to_i
+    end
+
+    def load_recipients
+      @other_users = User.without current_user
     end
 end
