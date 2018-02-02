@@ -10,11 +10,17 @@ class Message < ApplicationRecord
     includes(:accesses).where(accesses: {kind: :owner})
   end
 
-  def add_recipient user
-    Access.create user: user, message: self, kind: :recipient
+  def add_recipient *users
+    users.each do |user|
+      Access.create user: user, message: self, kind: :recipient
+    end
   end
 
   def sender
     accesses.find_by(kind: :owner).user
+  end
+
+  def recipients
+    users.includes(:accesses).where accesses: {kind: :recipient}
   end
 end

@@ -15,6 +15,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
+    @other_users = User.without current_user
     @message = Message.new
   end
 

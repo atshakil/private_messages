@@ -14,6 +14,8 @@
   <div class="field">
     <%= form.label :content %>
     <%= form.text_field :content, id: :message_content %>
+    <%= form.label :recipient %>
+    <%= select_tag(:recipient, '<option value="1">Lisbon</option>...') %>
   </div>
 
   <div class="actions">
