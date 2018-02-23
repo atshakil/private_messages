@@ -5,5 +5,5 @@
   <%= @message.content %>
 </p>
 
-<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= authorized_edit_message_path @message %>&nbsp;
 <%= link_to 'Back', messages_path %>
