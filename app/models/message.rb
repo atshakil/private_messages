@@ -70,6 +70,11 @@ class Message < ApplicationRecord
     users.includes(:accesses).where accesses: {kind: :recipient}
   end
 
+  # Returns the last recipient from recipient collection
+  def recipient
+    recipients.last
+  end
+
   def remove_recipients
     self.accesses.where(accesses: {kind: :recipient}).destroy_all
   end
