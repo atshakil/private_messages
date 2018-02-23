@@ -1,3 +1,4 @@
+# TODO: Implement soft delete
 class Message < ApplicationRecord
   has_many :accesses, dependent: :destroy
   has_many :users, through: :accesses

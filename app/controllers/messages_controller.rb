@@ -2,11 +2,13 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_message, only: [:show, :edit, :update, :destroy]
   before_action :load_recipients, only: [:new, :create, :edit]
+  load_and_authorize_resource
 
   # GET /messages
   # GET /messages.json
   def index
-    @messages = current_user.messages
+    # @messages is automatically set to
+    # Product.accessible_by(current_ability) by CanCanCan
   end
 
   # GET /messages/1
