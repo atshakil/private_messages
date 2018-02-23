@@ -16,8 +16,8 @@
     <%= form.text_field :content, id: :message_content, required: true %>
     <%= form.label :recipient %>
     <%= select_tag :recipient_id,
-      options_from_collection_for_select(@other_users, :id, :full_name),
-      prompt: "--- Select ---", required: true %>
+      options_from_collection_for_select(@other_users, :id, :full_name,
+      recipient_id(message)), prompt: "--- Select ---", required: true %>
   </div>
 
   <div class="actions">
