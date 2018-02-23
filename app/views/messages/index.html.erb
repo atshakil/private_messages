@@ -20,7 +20,7 @@
   <tbody>
     <% @messages.received.each do |message| %>
       <tr>
-        <td><%= message.content %></td>
+        <td><%= truncate message.content %></td>
         <td><%= recipient_name message  %></td>
         <td><%= link_to 'Show', message %></td>
       </tr>
@@ -44,7 +44,7 @@
   <tbody>
   <% @messages.sent.each do |message| %>
     <tr>
-      <td><%= message.content %></td>
+      <td><%= truncate message.content %></td>
       <td><%= recipient_name message  %></td>
       <td><%= link_to 'Show', message %></td>
       <td><%= link_to 'Edit', edit_message_path(message) %></td>
