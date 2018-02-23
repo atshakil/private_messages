@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1.json
   def update
     respond_to do |format|
-      if @message.update(message_params)
+      if @message.commit_with_recipient recipient_param, message_params
         format.html { redirect_to @message, notice: 'Message was successfully updated.' }
         format.json { render :show, status: :ok, location: @message }
       else

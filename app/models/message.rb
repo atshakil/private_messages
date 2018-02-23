@@ -30,12 +30,19 @@ class Message < ApplicationRecord
     is_committed
   end
 
-  def commit_with_recipient *users
+  # TODO: Investigate optimization for `Access` rewrite
+  def commit_with_recipient *users, attrib_updates
     is_committed = false
 
     Message.transaction do
       begin
-        self.save!
+        if self.new_record?
+          self.save!
+        else
+          self.remove_recipients
+          self.update_attributes! attrib_updates
+        end
+
         users.each do |user|
           Access.create!({message: self, kind: :recipient}.merge(
             user.instance_of?(User) ? {user: user} : {user_id: user}
@@ -61,5 +68,9 @@ class Message < ApplicationRecord
 
   def recipients
     users.includes(:accesses).where accesses: {kind: :recipient}
+  end
+
+  def remove_recipients
+    self.accesses.where(accesses: {kind: :recipient}).destroy_all
   end
 end
