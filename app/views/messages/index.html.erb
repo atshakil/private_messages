@@ -2,6 +2,12 @@
 
 <h1>Messages</h1>
 
+<br>
+<%= link_to 'New Message', new_message_path %>
+<br><hr>
+
+<h2>Received messages</h2>
+
 <table>
   <thead>
     <tr>
@@ -12,7 +18,7 @@
   </thead>
 
   <tbody>
-    <% @messages.each do |message| %>
+    <% @messages.received.each do |message| %>
       <tr>
         <td><%= message.content %></td>
         <td><%= recipient_name message  %></td>
@@ -24,6 +30,30 @@
   </tbody>
 </table>
 
-<br>
+<br><hr>
 
-<%= link_to 'New Message', new_message_path %>
+<h2>Sent messages</h2>
+
+<table>
+  <thead>
+  <tr>
+    <th>Content</th>
+    <th>Recipient</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @messages.sent.each do |message| %>
+    <tr>
+      <td><%= message.content %></td>
+      <td><%= recipient_name message  %></td>
+      <td><%= link_to 'Show', message %></td>
+      <td><%= link_to 'Edit', edit_message_path(message) %></td>
+      <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br><hr>

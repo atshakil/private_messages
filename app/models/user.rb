@@ -13,6 +13,10 @@ class User < ApplicationRecord
     Access.create user: self, message: message
   end
 
+  def sent_messages
+    messages.includes(:accesses).where accesses: {kind: :owner}
+  end
+
   def received_messages
     messages.includes(:accesses).where accesses: {kind: :recipient}
   end
