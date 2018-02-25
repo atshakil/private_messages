@@ -30,4 +30,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  validation:
+    uniqueness:
+      message_user: "An user may have only one role per message"
