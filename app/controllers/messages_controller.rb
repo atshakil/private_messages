@@ -31,7 +31,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params.merge users: [current_user])
 
     respond_to do |format|
-      if @message.commit_with_recipient recipient_param
+      if @message.commit_with_recipient recipient_param, {}
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
