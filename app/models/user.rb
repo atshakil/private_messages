@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :accesses
   has_many :messages, through: :accesses
 
+  validates :first_name, :last_name, presence: true, length: {minimum: 2}
+
   scope :without, ->user {where.not id: user.id}
 
   def create_message content

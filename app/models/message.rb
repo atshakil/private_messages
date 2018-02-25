@@ -3,6 +3,8 @@ class Message < ApplicationRecord
   has_many :accesses, dependent: :destroy
   has_many :users, through: :accesses
 
+  validates :content, presence: true, length: {minimum: 1}
+
   scope :received, -> do
     includes(:accesses).where(accesses: {kind: :recipient})# `includes` (optimization only)
   end
