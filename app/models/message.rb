@@ -13,6 +13,8 @@ class Message < ApplicationRecord
     includes(:accesses).where(accesses: {kind: :owner})
   end
 
+  scope :im_sorted, -> {order created_at: :desc}
+
   # TODO: Error message passthrough
   def add_recipient *users
     is_committed = false

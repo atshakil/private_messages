@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
   def index
     # @messages is automatically set to
     # Product.accessible_by(current_ability) by CanCanCan
+    @messages = @messages.im_sorted
   end
 
   # GET /messages/1
