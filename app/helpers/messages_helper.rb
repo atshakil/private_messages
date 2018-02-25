@@ -10,6 +10,11 @@ module MessagesHelper
     recipient.full_name if recipient
   end
 
+  def sender_name message
+    sender = message.sender
+    sender.full_name if sender
+  end
+
   def authorized_edit_message_path message
     link_to("Edit", edit_message_path(@message)) if can? :update, message
   end

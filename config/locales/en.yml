@@ -33,3 +33,5 @@ en:
   validation:
     uniqueness:
       message_user: "An user may have only one role per message"
+  generic:
+    me: "Me"

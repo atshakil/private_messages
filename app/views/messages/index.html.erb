@@ -12,7 +12,7 @@
   <thead>
     <tr>
       <th>Content</th>
-      <th>Recipient</th>
+      <th>From</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
     <% @messages.received.each do |message| %>
       <tr>
         <td><%= truncate message.content %></td>
-        <td><%= recipient_name message  %></td>
+        <td><%= sender_name message  %></td>
         <td><%= link_to 'Show', message %></td>
       </tr>
     <% end %>

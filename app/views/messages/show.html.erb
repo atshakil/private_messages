@@ -2,7 +2,12 @@
 
 <p>
   <strong>From:</strong>
-  <%= @message.sender.full_name %>
+  <%= @message.sender == current_user ? t("generic.me") : @message.sender.full_name %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @message.recipient == current_user ? t("generic.me") : @message.recipient.full_name %>
 </p>
 
 <p>
